@@ -177,7 +177,7 @@ class SavedVideos extends Component {
   }
 
   renderTop = isDark => {
-    const backgroundColor = isDark ? '#231f20' : '#ebebeb'
+    const backgroundColor = isDark ? '#0f0f0f' : '#ebebeb'
     const logoBgColor = isDark ? '#181818' : '#d7dfe9'
     const colorHeading = isDark ? '#ffffff' : '#212121'
     return (

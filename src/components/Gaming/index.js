@@ -63,39 +63,6 @@ class Gaming extends Component {
     this.getData()
   }
 
-  getData = async () => {
-    this.setState({apiStatus: apiUrlStatusConstant.inProgress})
-    const jwtToken = Cookies.get('jwt_token')
-    const apiGameUrl = 'https://apis.ccbp.in/videos/gaming'
-    const option = {
-      headers: {
-        Authorization: `Bearer ${jwtToken}`,
-      },
-      method: 'GET',
-    }
-
-    const fetchedGameData = await fetch(apiGameUrl, option)
-    const gameData = await fetchedGameData.json()
-
-    if (fetchedGameData.ok) {
-      const updatedGameData = gameData.videos.map(eachVideoItem => ({
-        id: eachVideoItem.id,
-        thumbnailUrl: eachVideoItem.thumbnail_url,
-        viewCount: eachVideoItem.view_count,
-        title: eachVideoItem.title,
-      }))
-      console.log(updatedGameData)
-      this.setState({
-        videoList: updatedGameData,
-        apiStatus: apiUrlStatusConstant.success,
-      })
-    } else {
-      this.setState({
-        apiStatus: apiUrlStatusConstant.failure,
-      })
-    }
-  }
-
   renderSideContainer = isDark => (
     <SideContainer
       width={20}
@@ -162,6 +129,39 @@ class Gaming extends Component {
       </div>
     </SideContainer>
   )
+
+  getData = async () => {
+    this.setState({apiStatus: apiUrlStatusConstant.inProgress})
+    const jwtToken = Cookies.get('jwt_token')
+    const apiGameUrl = 'https://apis.ccbp.in/videos/gaming'
+    const option = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      method: 'GET',
+    }
+
+    const fetchedGameData = await fetch(apiGameUrl, option)
+    const gameData = await fetchedGameData.json()
+
+    if (fetchedGameData.ok) {
+      const updatedGameData = gameData.videos.map(eachVideo => ({
+        id: eachVideo.id,
+        thumbnailUrl: eachVideo.thumbnail_url,
+        viewCount: eachVideo.view_count,
+        title: eachVideo.title,
+      }))
+      console.log(updatedGameData)
+      this.setState({
+        videoList: updatedGameData,
+        apiStatus: apiUrlStatusConstant.success,
+      })
+    } else {
+      this.setState({
+        apiStatus: apiUrlStatusConstant.failure,
+      })
+    }
+  }
 
   renderSuccess = isDark => {
     const {videoList} = this.state

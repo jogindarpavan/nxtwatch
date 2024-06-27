@@ -152,6 +152,7 @@ class Trending extends Component {
         viewCount: eachVideo.view_count,
         title: eachVideo.title,
       }))
+      console.log(updatedData)
       this.setState({
         videoList: updatedData,
         apiStatus: apiUrlStatusConstant.success,
