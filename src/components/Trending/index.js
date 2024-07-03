@@ -3,7 +3,7 @@ import {IoMdHome} from 'react-icons/io'
 import {FaGamepad} from 'react-icons/fa'
 import {HiFire} from 'react-icons/hi'
 import {MdPlaylistAdd} from 'react-icons/md'
-import {formatDistanceToNow} from 'date-fns'
+
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
@@ -147,7 +147,7 @@ class Trending extends Component {
       const updatedData = data.videos.map(eachVideo => ({
         channel: eachVideo.channel,
         id: eachVideo.id,
-        publishedAt: eachVideo.published_at,
+
         thumbnailUrl: eachVideo.thumbnail_url,
         viewCount: eachVideo.view_count,
         title: eachVideo.title,
@@ -200,9 +200,6 @@ class Trending extends Component {
     return (
       <VideoUnorderedList>
         {videoList.map(eachVideo => {
-          const timeDifference = formatDistanceToNow(
-            new Date(eachVideo.publishedAt),
-          )
           const {id} = eachVideo
           const titleColor = isDark ? '#ffffff' : '#212121'
           const textColor = isDark ? '#94a3b8' : '#64748b'
@@ -218,7 +215,7 @@ class Trending extends Component {
                   <Title color={titleColor}>{eachVideo.title}</Title>
                   <Text color={textColor}>{eachVideo.channel.name}</Text>
                   <Text color={textColor}>
-                    {eachVideo.viewCount} views {timeDifference} ago
+                    {eachVideo.viewCount} views .{eachVideo.publishedAt} ago
                   </Text>
                 </TextContainer>
               </VideoListItem>
@@ -245,7 +242,7 @@ class Trending extends Component {
   }
 
   renderTop = isDark => {
-    const backgroundColor = isDark ? '#231f20' : '#ebebeb'
+    const backgroundColor = isDark ? '#0f0f0f' : '#ebebeb'
     const logoBgColor = isDark ? '#181818' : '#d7dfe9'
     const colorHeading = isDark ? '#ffffff' : '#212121'
     return (

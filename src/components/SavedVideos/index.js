@@ -3,7 +3,6 @@ import {IoMdHome} from 'react-icons/io'
 import {FaGamepad} from 'react-icons/fa'
 import {HiFire} from 'react-icons/hi'
 import {MdPlaylistAdd} from 'react-icons/md'
-import {formatDistanceToNow} from 'date-fns'
 import {Component} from 'react'
 import ThemeContext from '../../context/ThemeContext'
 import Header from '../Header'
@@ -60,7 +59,7 @@ class SavedVideos extends Component {
             let activeColor = ''
             let fontWeight = 'normal'
             if (isClick) {
-              activeBgColor = isDark ? '#424242' : '#f1f5f9'
+              activeBgColor = isDark ? '#0f0f0f' : '#f1f5f9'
               activeColor = 'red'
               fontWeight = 'bold'
             }
@@ -141,9 +140,6 @@ class SavedVideos extends Component {
             >
               <VideoUnorderedList>
                 {savedVideosList.map(eachVideo => {
-                  const timeDifference = formatDistanceToNow(
-                    new Date(eachVideo.publishedAt),
-                  )
                   const {id} = eachVideo
                   const titleColor = isDark ? '#ffffff' : '#212121'
                   const textColor = isDark ? '#94a3b8' : '#64748b'
@@ -161,7 +157,8 @@ class SavedVideos extends Component {
                             {eachVideo.channel.name}
                           </Text>
                           <Text color={textColor}>
-                            {eachVideo.viewCount} views . {timeDifference} ago
+                            {eachVideo.viewCount} views .{eachVideo.publishedAt}{' '}
+                            ago
                           </Text>
                         </TextContainer>
                       </VideoListItem>

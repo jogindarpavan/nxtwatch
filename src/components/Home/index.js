@@ -3,7 +3,7 @@ import {IoMdHome} from 'react-icons/io'
 import {HiFire} from 'react-icons/hi'
 import {MdPlaylistAdd} from 'react-icons/md'
 import {FaGamepad} from 'react-icons/fa'
-import {formatDistanceToNow} from 'date-fns'
+
 import {AiOutlineClose, AiOutlineSearch} from 'react-icons/ai'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
@@ -95,11 +95,7 @@ class Home extends Component {
 
             return (
               <Link className="link-style" to={eachContent.link}>
-                <ListElement
-                  bgColor={activeBgColor}
-                  key={eachContent.id}
-                  color={activeColor}
-                >
+                <ListElement bgColor={activeBgColor} color={activeColor}>
                   {icon}
                   <ListItem isDark={isDark} fontWeight={fontWeight}>
                     {eachContent.title}
@@ -240,9 +236,6 @@ class Home extends Component {
         {isEmpty
           ? this.renderEmptyView(isDark)
           : videoList.map(eachVideo => {
-              const timeDifference = formatDistanceToNow(
-                new Date(eachVideo.publishedAt),
-              )
               const {id} = eachVideo
               const titleColor = isDark ? '#ffffff' : '#212121'
               const textColor = isDark ? '#94a3b8' : '#64748b'
@@ -265,7 +258,8 @@ class Home extends Component {
                           {eachVideo.channel.name}
                         </Title>
                         <Title color={textColor}>
-                          {eachVideo.viewCount} views {timeDifference} ago
+                          {eachVideo.viewCount} views . {eachVideo.publishedAt}{' '}
+                          ago
                         </Title>
                       </TextContainer>
                     </DetailContainer>
